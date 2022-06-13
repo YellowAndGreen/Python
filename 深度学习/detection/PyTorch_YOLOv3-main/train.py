@@ -53,7 +53,7 @@ def parse_args():
                         default=10, help='interval between evaluations')
     parser.add_argument('--cuda', action='store_true', default=False,
                         help='use cuda.')
-    parser.add_argument('--tfboard', action='store_true', default=False,
+    parser.add_argument('--tfboard', action='store_true', default=True,
                         help='use tensorboard')
     parser.add_argument('--debug', action='store_true', default=False,
                         help='debug mode where only one image is trained')
@@ -142,7 +142,7 @@ def train():
         dataset,
         batch_size=args.batch_size,
         shuffle=True,
-        collate_fn=detection_collate,
+        collate_fn=detection_collate,   # 在data的init中定义
         num_workers=args.num_workers,
         pin_memory=True
     )

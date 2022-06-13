@@ -128,11 +128,12 @@ class COCODataset(Dataset):
         # COCOAnnotation Transform
         # start here :
         target = []
+        # 注解里是左下角坐标 + 锚框宽高
         for anno in annotations:
             if 'bbox' in anno and anno['area'] > 0:
                 xmin = np.max((0, anno['bbox'][0]))
                 ymin = np.max((0, anno['bbox'][1]))
-                xmax = np.min((width - 1, xmin + np.max((0, anno['bbox'][2] - 1))))
+                xmax = np.min((width - 1, xmin + np.max((0, anno['bbox'][2] - 1))))  # 这里为什么要减1呢？
                 ymax = np.min((height - 1, ymin + np.max((0, anno['bbox'][3] - 1))))
                 # xmin, ymin, w, h = anno['bbox']
                 # xmax = xmin + w
